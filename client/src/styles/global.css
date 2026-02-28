@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "IntegralCF";
+  src: url("../../public/fonts/IntegralCF/IntegralCF-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../../public/fonts/Satoshi/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.text-satoshi {
+  font-family: "Satoshi";
+  font-weight: bold;
+}
+
+.hover:hover {
+  font-weight: bold;
+}
+
+.header{
+  display: flex;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: 900;
+  margin: 10px ;
+}
+
+.icons {
+    width: 32px;
+    height: 32px;
+}
+
+.custom-caret::after {
+  border: none;
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 6px;
+
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+
+  transform: rotate(45deg);
+  vertical-align: middle;
+}
+
+/* Brand Mraquee */
+.brands-marquee {
+  overflow: hidden;
+  width: 100%;
+  background: #000;
+  padding: 1rem 0;
+}
+
+.brands-track {
+  display: flex;
+  width: max-content;
+  animation: scrollBrands 18s linear infinite;
+}
+
+.brand-item {
+  flex: 0 0 auto;
+  margin-right: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo {
+  object-fit: contain;
+  height: 5em;
+}
+
+@keyframes scrollBrands {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-30%);
+  }
+}
+
+@media (max-width: 390px) {
+  .header{
+  width: 100vw;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.icons {
+    height: 20px;
+    width: 20px;
+}
+}

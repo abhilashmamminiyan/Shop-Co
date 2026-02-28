@@ -1,0 +1,102 @@
+#hero-section {
+    background-color: antiquewhite;
+}
+
+.heroTitle {
+    font-family:'IntegralCF';
+    font-style: Bold;
+    font-size: 64px;
+}
+
+.heroDescription {
+  font-family: 'Satoshi';
+}
+
+.heroImageWrapper {
+    position: relative;
+    max-width: 100%;
+    margin-left: auto;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+}
+
+.heroStar {
+  position: absolute;
+  top: 3em;
+  right: 10px;
+  max-width: 10vw;
+  height: 7em;
+}
+
+.heroStar2 {
+  position: absolute;
+  top: 15em;
+  left: 10px;
+  max-width: 25vw;
+  height: 5em;
+}
+
+.brands {
+  background-color: #000;
+}
+
+.textTitle {
+  font-family: "IntegralCF";
+  font-weight: bolder;
+}
+
+.sectionBorder {
+  border-top: 1px solid dimgrey;
+}
+
+@media (max-width: 500px) {
+  .heroTitle {
+    font-size: 34px;
+  }
+
+  .heroDescription {
+    margin-left: auto;
+    margin-right: auto;
+    color: slategray;
+  }
+
+  .heroBtn {
+  padding: 10px !important;
+  width: 100%;
+}
+
+.viewBtn {
+  padding: 10px !important;
+  width: 100%;
+}
+  .heroImageWrapper {
+    min-height: 40vh;
+    width: auto;
+    margin-left: 0;
+    overflow: hidden;
+  }
+
+  .heroImage {
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .heroStar {
+  position: absolute;
+  top: 1em;
+  right: 10px;
+  max-width: 20vw;
+  height: 5rem;
+}
+
+.heroStar2 {
+  position: absolute;
+  top: 9.5em;
+  left: 10px;
+  max-width: 3rem;
+  height: 2.5rem;
+}
+}

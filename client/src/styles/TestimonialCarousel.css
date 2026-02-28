@@ -1,0 +1,184 @@
+:root {
+    --testimonial-slide-width: 400px;
+    --testimonial-gap: 20px;
+    --total-slide-width: calc(var(--testimonial-slide-width) + var(--testimonial-gap));
+}
+
+.carousel-container-full {
+    width: 100%;
+    margin: 60px 0;
+    overflow: hidden;
+}
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 1200px; /* Keep header within standard container width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.carousel-title {
+    font-size: 40px;
+    font-weight: 900;
+    color: #000;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.carousel-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.carousel-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    color: #000;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-button:hover {
+    opacity: 0.6;
+}
+
+.carousel-viewport {
+    width: 100vw;
+    overflow: visible; /* Show the blurred cards on the sides */
+    position: relative;
+    padding: 20px 0;
+}
+
+.testimonial-track {
+    display: flex;
+    gap: var(--testimonial-gap);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    /* Offset logic: 
+       Center the 3 cards. The leftmost visible card should be at (100vw - 3*totalWidth)/2.
+       Wait, simpler: Move to currentIndex * totalWidth, then adjust by (100vw - 3*totalWidth)/2
+    */
+    transform: translateX(calc(-1 * (var(--current-index) * var(--total-slide-width)) + (100vw - 3 * var(--total-slide-width) + var(--testimonial-gap)) / 2));
+}
+
+.testimonial-card {
+    flex: 0 0 var(--testimonial-slide-width);
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s ease;
+    opacity: 1;
+    filter: blur(0);
+}
+
+.testimonial-card.blurred {
+    opacity: 0.4;
+    filter: blur(4px);
+    transform: scale(0.95);
+}
+
+.testimonial-card:hover:not(.blurred) {
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.card-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.author-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.testimonial-author {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.verified-badge {
+    display: flex;
+    align-items: center;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+}
+
+.star {
+    font-size: 22px;
+    color: #ffc229;
+}
+
+.testimonial-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --testimonial-slide-width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    :root {
+        --testimonial-slide-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --testimonial-slide-width: calc(100vw - 60px);
+    }
+    
+    .carousel-header {
+        flex-direction: row; /* Keep title and arrows on the same line */
+        justify-content: space-between;
+        align-items: flex-end; /* Align arrows to the bottom of the stacked title */
+        padding: 0 20px;
+        gap: 10px;
+    }
+    
+    .carousel-title {
+        font-size: 32px; /* Slightly larger for better impact */
+        line-height: 1.1;
+        display: flex;
+        flex-direction: column; /* Stacks the spans */
+        text-align: left;
+    }
+
+    .carousel-controls {
+        gap: 8px;
+    }
+
+    .testimonial-card.blurred {
+        opacity: 0; /* Hide blurred on mobile for better focus */
+        pointer-events: none;
+    }
+    
+    .testimonial-track {
+        /* Centering 1 card on mobile */
+        transform: translateX(calc(-1 * (var(--current-index) * var(--total-slide-width)) + (100vw - var(--total-slide-width) + var(--testimonial-gap)) / 2));
+    }
+}

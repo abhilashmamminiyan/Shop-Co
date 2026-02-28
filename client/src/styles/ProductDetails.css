@@ -1,0 +1,17 @@
+.thumbnail {
+  border: 2px solid transparent;
+  transition: border 0.2s ease, transform 0.2s ease;
+}
+
+.thumbnail:hover {
+  border-color: #31344F;
+  transform: scale(1.05);
+}
+
+.active-thumb {
+  border-color: #31344F;
+}
+
+.main-image {
+  border: 1px solid #e0e0e0;
+}
