@@ -14,7 +14,6 @@ const getCartByUserId = async (userId) => {
     });
     
     if (!cart) {
-        console.log('Creating new cart for userId:', userId);
         cart = await Cart.create({ userId });
         cart.items = [];
     }
@@ -23,7 +22,6 @@ const getCartByUserId = async (userId) => {
 };
 
 const addItemToCart = async (userId, productId, quantity, size, color) => {
-    console.log('Adding to cart - userId:', userId, 'productId:', productId);
     let cart = await Cart.findOne({ where: { userId } });
     if (!cart) {
         console.log('Creating new cart for userId:', userId);

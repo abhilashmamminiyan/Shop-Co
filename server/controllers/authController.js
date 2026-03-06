@@ -4,7 +4,6 @@ const { hashPassword, comparePassword } = require('../utils/passwordHelper');
 const { createJwt } = require('../utils/jwtHelper');
 
 const register = asyncHandler(async(req, res, next) => {
-    console.log(req.body);
     const { name, email, password } = req.body;
     const userExists = await User.findOne({ where: {email} });
     if(userExists) {

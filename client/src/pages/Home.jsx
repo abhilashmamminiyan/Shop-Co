@@ -74,8 +74,7 @@ export default function HomePage() {
   // Improve logic for new arrivals / top sale if possible. For now, just slice.
   const newArrivalProducts = products.slice(0, 4);
   const topSaleProducts = products.slice(4, 8);
-console.log(products)
-console.log(categories.map(cat => cat.col))
+
   return (
     <>
       {/* Hero Section */}

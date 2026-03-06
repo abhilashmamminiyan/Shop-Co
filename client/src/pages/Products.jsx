@@ -1,14 +1,11 @@
 import { useState } from "react";
 import FilterSidebar from "../components/category/FilterSideBar";
 import ProductList from "../components/products/ProductList";
-import { Drawer, IconButton, Box, useTheme, useMediaQuery } from "@mui/material";
+import { Drawer, IconButton, Box } from "@mui/material";
 import FilterListIcon from '@mui/icons-material/FilterList';
 
 export default function Products() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const theme = useTheme();
-  // Check if screen is small (md and down)
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
