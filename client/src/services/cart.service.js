@@ -1,6 +1,6 @@
-import axios from 'axios';
+import api from './api';
 
-const API_URL = 'http://localhost:4000/api/cart/';
+const API_URL = '/cart/';
 
 const getAuthHeader = () => {
     const userData = localStorage.getItem('user');
@@ -28,13 +28,13 @@ const getAuthHeader = () => {
 };
 
 const getCart = () => {
-    return axios.get(API_URL, {
+    return api.get(API_URL, {
         headers: getAuthHeader(),
     });
 };
 
 const addToCart = (productId, quantity, size, color) => {
-    return axios.post(API_URL, { productId, quantity, size, color }, {
+    return api.post(API_URL, { productId, quantity, size, color }, {
         headers: getAuthHeader(),
     });
 };
@@ -44,19 +44,19 @@ const removeFromCart = (productId, size = '', color = '') => {
     const colorParam = color ? `color=${encodeURIComponent(color)}` : '';
     const query = [sizeParam, colorParam].filter(Boolean).join('&');
     
-    return axios.delete(API_URL + productId + (query ? `?${query}` : ''), {
+    return api.delete(API_URL + productId + (query ? `?${query}` : ''), {
         headers: getAuthHeader(),
     });
 }
 
 const updateCartItem = (productId, quantity, size = '', color = '') => {
-    return axios.put(API_URL, { productId, quantity, size, color }, {
+    return api.put(API_URL, { productId, quantity, size, color }, {
         headers: getAuthHeader(),
     });
 };
 
 const syncCart = (items) => {
-    return axios.put(API_URL + 'sync', { items }, {
+    return api.put(API_URL + 'sync', { items }, {
         headers: getAuthHeader(),
     });
 };

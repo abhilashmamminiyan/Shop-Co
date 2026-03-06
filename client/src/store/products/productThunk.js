@@ -6,7 +6,7 @@ export const fetchProductsByCategory = createAsyncThunk(
   async (categoryId, { rejectWithValue }) => {
     try {
       const res = await api.get(`/products?category=${categoryId}`);
-      return res.data;
+      return res.data.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -18,7 +18,7 @@ export const fetchProductById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const res = await api.get(`/products/${id}`);
-      return res.data;
+      return res.data.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }

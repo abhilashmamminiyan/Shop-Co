@@ -34,7 +34,7 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     if (product) {
-      setActiveImage(product.image);
+      setActiveImage(product.images[0]);
     }
   }, [product]);
 
@@ -109,15 +109,7 @@ export default function ProductDetailPage() {
 
   if (!product) return <p className="container mt-5">Loading or Product not found...</p>;
 
-  // Ensure images array exists
   const images = product.images || (product.image ? [product.image] : []);
-
-  // Map color names to hex codes for display if needed, or just use name
-  // Assuming colors are names or hex codes. 
-  const getColorStyle = (color) => {
-      // Basic mapping or just use the string if it's a valid CSS color
-      return { backgroundColor: color };
-  };
 
   return (
     <>

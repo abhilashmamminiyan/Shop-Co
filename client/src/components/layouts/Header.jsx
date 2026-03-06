@@ -66,7 +66,7 @@ export default function Header() {
                 <img className='icons' src="/icons/user-icon.svg" alt="user-icon" />
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
-                <li><span className="dropdown-item-text fw-bold">Hi, {user?.username || 'User'}</span></li>
+                <li><span className="dropdown-item-text fw-bold">Hi, {user?.name || 'User'}</span></li>
                 <li><Link className="dropdown-item" to="/orders">My Orders</Link></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><button className="dropdown-item text-danger" onClick={handleLogout}>Logout</button></li>

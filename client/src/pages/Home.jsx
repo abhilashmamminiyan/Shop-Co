@@ -20,7 +20,7 @@ export default function HomePage() {
     if (products.length === 0) {
       dispatch(fetchProducts());
     }
-  }, [categories, products, dispatch]);
+  }, [categories.length, products.length, dispatch]);
 
   const brands = [
     { name: "versace", logo: "/images/brand-versace.png" },
@@ -74,7 +74,8 @@ export default function HomePage() {
   // Improve logic for new arrivals / top sale if possible. For now, just slice.
   const newArrivalProducts = products.slice(0, 4);
   const topSaleProducts = products.slice(4, 8);
-
+console.log(products)
+console.log(categories.map(cat => cat.col))
   return (
     <>
       {/* Hero Section */}
@@ -176,8 +177,8 @@ export default function HomePage() {
           Browse By Dress Style
         </h1>
         <div className="row g-3 mt-5 p-3">
-          {categories && categories.map(category => (
-            <div key={category.id} className={category.col || 'col-12 col-md-6'}>
+          {categories && categories.map((category, i) => (
+            <div key={category.id} className={i % 4 === 0 || i % 4 === 3 ? 'col-12 col-md-8' : 'col-12 col-md-4'}>
               <Link to={`/category/${category.id}`} style={{ textDecoration: 'none' }}>
                 <img
                   src={category.image}
