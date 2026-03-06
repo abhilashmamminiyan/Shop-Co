@@ -22,7 +22,7 @@ const getCartByUserId = async (userId) => {
     return cart;
 };
 
-const addItemToCart = async (userId, productId, quantity) => {
+const addItemToCart = async (userId, productId, quantity, size, color) => {
     console.log('Adding to cart - userId:', userId, 'productId:', productId);
     let cart = await Cart.findOne({ where: { userId } });
     if (!cart) {
@@ -30,9 +30,8 @@ const addItemToCart = async (userId, productId, quantity) => {
         cart = await Cart.create({ userId });
     }
 
-
     let cartItem = await CartItem.findOne({
-        where: { cartId: cart.id, productId }
+        where: { cartId: cart.id, productId, size, color }
     });
 
     if (cartItem) {
@@ -42,17 +41,19 @@ const addItemToCart = async (userId, productId, quantity) => {
         cartItem = await CartItem.create({
             cartId: cart.id,
             productId,
-            quantity
+            quantity,
+            size,
+            color
         });
     }
 
     return cartItem;
 };
 
-const updateItemQuantity = async (userId, productId, quantity) => {
+const updateItemQuantity = async (userId, productId, quantity, size, color) => {
     const cart = await Cart.findOne({ where: { userId } });
     if (!cart) throw new Error('Cart not found');
-    const cartItem = await CartItem.findOne({ where: { cartId: cart.id, productId } });
+    const cartItem = await CartItem.findOne({ where: { cartId: cart.id, productId, size, color } });
     if (!cartItem) throw new Error('Item not found in cart');
     cartItem.quantity = parseInt(quantity);
     await cartItem.save();

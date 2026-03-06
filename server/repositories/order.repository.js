@@ -12,7 +12,9 @@ const createOrder = async (userId, total, items) => {
             orderId: order.id,
             productId: item.productId,
             quantity: item.quantity,
-            price: item.price
+            price: item.price,
+            size: item.size,
+            color: item.color
         });
     }
 

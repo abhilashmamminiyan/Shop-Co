@@ -53,6 +53,14 @@ const CartItem = sequelize.define('CartItem', {
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    size: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    color: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, { tableName: 'cart_items', timestamps: true });
 
@@ -98,6 +106,14 @@ const OrderItem = sequelize.define('OrderItem', {
     price: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
+    },
+    size: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    color: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 }, { tableName: 'order_items', timestamps: true });
 
