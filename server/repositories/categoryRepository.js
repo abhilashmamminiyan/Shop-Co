@@ -22,7 +22,9 @@ const getCategoryById = async (id) => {
 
 const createCategories = async (categories) => {
     return new Promise((resolve, reject) => {
-        Category.bulkCreate(categories).then((createdCategories) => {
+        Category.bulkCreate(categories, {
+            updateOnDuplicate: ["name", "slug", "image", "updatedAt"]
+        }).then((createdCategories) => {
             resolve(createdCategories);
         }).catch((error) => {
             reject(error);
