@@ -1,5 +1,6 @@
 const express = require('express');
-require('dotenv').config({path: './config/config.env'});
+const path = require('path');
+require('dotenv').config({path: path.join(__dirname, '../.env')});
 const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const authRoutes = require('./routes/authRoutes');
@@ -15,8 +16,12 @@ const sequelize = require('./config/db');
 app.get('/', (req, res) => {
     res.send('Welcome to Shopco API');
 });
+
+// Serve static files from uploads directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000'
 }));
 app.use(express.json());
 app.use('/api/products', productRoutes);

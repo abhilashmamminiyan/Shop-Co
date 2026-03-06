@@ -22,7 +22,9 @@ const getProductById = async (id) => {
 
 const createProducts = async (products) => {
     return new Promise((resolve, reject) => {
-        Product.bulkCreate(products).then((createdProducts) => {
+        Product.bulkCreate(products, {
+            updateOnDuplicate: ["name", "slug", "price", "originalPrice", "discountPercentage", "type", "sizes", "colors", "image", "images", "description", "rating", "categoryId", "updatedAt"]
+        }).then((createdProducts) => {
             resolve(createdProducts);
         }).catch((error) => {
             reject(error);
