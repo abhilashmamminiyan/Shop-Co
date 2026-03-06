@@ -7,7 +7,7 @@ const register = asyncHandler(async(req, res, next) => {
     const { name, email, password } = req.body;
     const userExists = await User.findOne({ where: {email} });
     if(userExists) {
-        res.status(400).json({message:"User already exists"});
+        return res.status(400).json({message:"User already exists"});
     }
     const hashedPassword = hashPassword(password);
     const user = await User.create({
@@ -28,11 +28,11 @@ const login = asyncHandler(async(req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ where: {email} });
     if(!user) {
-        res.status(400).json({message:"Invalid Credentials"});
+        return res.status(400).json({message:"Invalid Credentials"});
     }
     const isPasswordValid = comparePassword(password, user.password);
     if(!isPasswordValid) {
-        res.status(400).json({message:"Invalid Credentials"});
+        return res.status(400).json({message:"Invalid Credentials"});
     }
     const token = createJwt(user.id);
     res.status(200).json({
