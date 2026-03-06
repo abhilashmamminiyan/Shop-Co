@@ -50,7 +50,7 @@ const removeFromCart = (productId, size = '', color = '') => {
 }
 
 const updateCartItem = (productId, quantity, size = '', color = '') => {
-    return api.put(API_URL, { productId, quantity, size, color }, {
+    return api.patch(API_URL, { productId, quantity, size, color }, {
         headers: getAuthHeader(),
     });
 };
