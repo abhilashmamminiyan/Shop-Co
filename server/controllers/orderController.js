@@ -3,7 +3,7 @@ const orderRepository = require('../repositories/order.repository');
 const cartRepository = require('../repositories/cart.repository');
 
 const createOrder = asyncHandler(async (req, res) => {
-    let { total, items } = req.body;
+    let { total, subtotal, discount, deliveryFee, items } = req.body;
 
     if (!items || items.length === 0 || !total) {
         const cart = await cartRepository.getCartByUserId(req.userId);
@@ -19,12 +19,13 @@ const createOrder = asyncHandler(async (req, res) => {
             color: cartItem.color
         }));
         
-        const subtotal = items.reduce((acc, item) => acc + (parseFloat(item.price) * item.quantity), 0);
-        const discount = subtotal * 0.20;
-        total = subtotal - discount + 15;
+        subtotal = items.reduce((acc, item) => acc + (parseFloat(item.price) * item.quantity), 0);
+        discount = subtotal * 0.20;
+        deliveryFee = 15;
+        total = subtotal - discount + deliveryFee;
     }
 
-    const order = await orderRepository.createOrder(req.userId, total, items);
+    const order = await orderRepository.createOrder(req.userId, total, subtotal, discount, deliveryFee, items);
     
     // Clear cart after order
     await cartRepository.clearCart(req.userId);

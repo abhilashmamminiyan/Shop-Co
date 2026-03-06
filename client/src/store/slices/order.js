@@ -62,6 +62,9 @@ const orderSlice = createSlice({
                 state.orders = rawOrders.map(order => ({
                     ...order,
                     totalAmount: order.total,
+                    subtotal: order.subtotal,
+                    discount: order.discount,
+                    deliveryFee: order.deliveryFee,
                     Products: (order.items || []).map(item => ({
                         ...item.product,
                         OrderItem: {
@@ -95,6 +98,9 @@ const orderSlice = createSlice({
                 state.adminOrders = rawOrders.map(order => ({
                     ...order,
                     totalAmount: order.total,
+                    subtotal: order.subtotal,
+                    discount: order.discount,
+                    deliveryFee: order.deliveryFee,
                     Products: (order.items || []).map(item => ({
                         ...item.product,
                         OrderItem: {
@@ -114,6 +120,9 @@ const orderSlice = createSlice({
                      const updatedOrder = {
                         ...updatedOrderRaw,
                         totalAmount: updatedOrderRaw.total,
+                        subtotal: updatedOrderRaw.subtotal,
+                        discount: updatedOrderRaw.discount,
+                        deliveryFee: updatedOrderRaw.deliveryFee,
                         Products: (updatedOrderRaw.items || []).map(item => ({
                             ...item.product,
                             OrderItem: {

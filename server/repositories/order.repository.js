@@ -1,9 +1,12 @@
 const { Order, OrderItem, Product } = require("../models/models");
 
-const createOrder = async (userId, total, items) => {
+const createOrder = async (userId, total, subtotal, discount, deliveryFee, items) => {
     const order = await Order.create({
         userId,
         total,
+        subtotal,
+        discount,
+        deliveryFee,
         status: 'pending'
     });
 

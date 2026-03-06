@@ -79,6 +79,29 @@ export default function OrdersPage() {
                                         </div>
                                     </div>
                                 ))}
+                                
+                                <div className="mt-4 pt-3 border-top">
+                                    <div className="row justify-content-end">
+                                        <div className="col-md-5 col-lg-4">
+                                            <div className="d-flex justify-content-between mb-1">
+                                                <span className="text-muted small">Subtotal</span>
+                                                <span className="fw-bold small">${parseFloat(order.subtotal || 0).toFixed(2)}</span>
+                                            </div>
+                                            <div className="d-flex justify-content-between mb-1">
+                                                <span className="text-muted small">Discount (-20%)</span>
+                                                <span className="text-danger small">-${parseFloat(order.discount || 0).toFixed(2)}</span>
+                                            </div>
+                                            <div className="d-flex justify-content-between mb-1">
+                                                <span className="text-muted small">Delivery Fee</span>
+                                                <span className="fw-bold small">${parseFloat(order.deliveryFee || 0).toFixed(2)}</span>
+                                            </div>
+                                            <div className="d-flex justify-content-between mt-2 border-top pt-2">
+                                                <span className="fw-bold">Total Amount</span>
+                                                <span className="fw-bold text-dark fs-5">${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     ))}
