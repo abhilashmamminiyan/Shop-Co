@@ -176,15 +176,14 @@ console.log(categories.map(cat => cat.col))
         <h1 className={`mb-4 text-center ${styles.textTitle} text-uppercase`}>
           Browse By Dress Style
         </h1>
-        <div className="row g-3 mt-5 p-3">
+        <div className="row g-4 mt-2 p-3">
           {categories && categories.map((category, i) => (
-            <div key={category.id} className={i % 4 === 0 || i % 4 === 3 ? 'col-12 col-md-8' : 'col-12 col-md-4'}>
+            <div key={category.id} className={i % 4 === 1 || i % 4 === 2 ? 'col-12 col-md-8' : 'col-12 col-md-4'}>
               <Link to={`/category/${category.id}`} style={{ textDecoration: 'none' }}>
                 <img
                   src={category.image}
                   alt={category.name}
-                  className="img-fluid rounded-4"
-                  style={{ height: '280px', width: '100%', objectFit: 'cover', cursor: 'pointer' }}
+                  className={`img-fluid rounded-4 ${styles.categoryImage}`}
                 />
               </Link>
             </div>

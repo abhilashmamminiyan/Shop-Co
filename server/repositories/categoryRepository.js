@@ -2,7 +2,9 @@ const { Category } = require("../models/models");
 
 const getAllCategories = async () => {
     return new Promise((resolve, reject) => {
-        Category.findAll().then((categories) => {
+        Category.findAll({
+            order: [['sortOrder', 'ASC']]
+        }).then((categories) => {
             resolve(categories);
         }).catch((error) => {
             reject(error);
@@ -23,7 +25,7 @@ const getCategoryById = async (id) => {
 const createCategories = async (categories) => {
     return new Promise((resolve, reject) => {
         Category.bulkCreate(categories, {
-            updateOnDuplicate: ["name", "slug", "image", "updatedAt"]
+            updateOnDuplicate: ["name", "slug", "image", "updatedAt", "sortOrder"]
         }).then((createdCategories) => {
             resolve(createdCategories);
         }).catch((error) => {

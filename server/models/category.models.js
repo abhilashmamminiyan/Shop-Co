@@ -9,6 +9,10 @@ const sequelize = require("../config/db");
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      sortOrder: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
