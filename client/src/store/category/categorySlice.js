@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategories, fetchCategoryById, createCategory, updateCategory, deleteCategory } from "./categoryThunk";
+import { fetchCategories, fetchCategoryById,
+   createCategory, updateCategory, deleteCategory
+  } from "./categoryThunk";
 
 const initialState = {
   categories: [],

@@ -12,7 +12,7 @@ const initialState = {
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async (_, thunkAPI) => {
   try {
     const response = await ProductService.getAllProducts();
-    return response.data; // Assuming API returns array or { data: [] }
+    return response.data.data; // Assuming API returns array or { data: [] }
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data);
   }
@@ -21,7 +21,7 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async (_
 export const fetchProductById = createAsyncThunk('products/fetchProductById', async (id, thunkAPI) => {
   try {
     const response = await ProductService.getProductById(id);
-    return response.data;
+    return response.data.data;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data);
   }

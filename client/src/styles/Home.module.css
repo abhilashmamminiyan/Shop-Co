@@ -100,3 +100,21 @@
   height: 2.5rem;
 }
 }
+
+.categoryImage {
+  height: 290px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.categoryImage:hover {
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .categoryImage {
+    height: 190px !important;
+  }
+}

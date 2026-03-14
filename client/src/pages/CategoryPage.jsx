@@ -5,8 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { setDraftCategory } from "../store/slices/filterSlice";
 import { fetchCategories } from "../store/category/categoryThunk"; // Ensure correct path
-import { Drawer, IconButton, Box, useTheme, useMediaQuery } from "@mui/material";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import { Drawer, IconButton, Box } from "@mui/material";
 
 export default function CategoryPage() {
   const { id } = useParams();
@@ -18,7 +17,6 @@ export default function CategoryPage() {
   const category = categories.find(c => c.id === id);
 
   const [mobileOpen, setMobileOpen] = useState(false);
-  const theme = useTheme();
   
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

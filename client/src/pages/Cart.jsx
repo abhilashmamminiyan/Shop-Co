@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, removeFromCart, updateItemQuantityAsync } from "../store/slices/cart";
+import { fetchCart, removeFromCart, updateItemQuantityAsync, updateItemQuantity } from "../store/slices/cart";
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "../components/common/Alert";
 
@@ -18,6 +18,7 @@ export default function Cart() {
   const handleQuantityChange = (id, currentQuantity, change, size = '', color = '') => {
     const newQuantity = currentQuantity + change;
     if (newQuantity >= 1) {
+      dispatch(updateItemQuantity({ productId: id, quantity: newQuantity, size, color }));
       dispatch(updateItemQuantityAsync({ productId: id, quantity: newQuantity, size, color }));
     }
   };
@@ -36,7 +37,7 @@ export default function Cart() {
 
 
 
-  if (status === 'loading') return <p className="container mt-5">Loading cart...</p>;
+  if (status === 'loading' && items.length === 0) return <p className="container mt-5">Loading cart...</p>;
 
   if (items.length === 0) {
     return (
@@ -120,20 +121,20 @@ export default function Cart() {
             <h4 className="mb-3 fw-bold">Order Summary</h4>
             <div className="d-flex justify-content-between mb-2">
               <span>Subtotal</span>
-              <span className="fw-bold">${cartTotalAmount}</span>
+              <span className="fw-bold">${cartTotalAmount.toFixed(2)}</span>
             </div>
             <div className="d-flex justify-content-between mb-2">
               <span>Discount (-20%)</span>
-              <span className="text-danger">-$0 (Mock)</span>
+              <span className="text-danger">-${(cartTotalAmount * 0.20).toFixed(2)}</span>
             </div>
             <div className="d-flex justify-content-between mb-2">
               <span>Delivery Fee</span>
-              <span>$15</span>
+              <span>$15.00</span>
             </div>
             <hr />
             <div className="d-flex justify-content-between mb-4">
               <span className="fw-bold fs-5">Total</span>
-              <span className="fw-bold fs-5">${cartTotalAmount + 15}</span>
+              <span className="fw-bold fs-5">${(cartTotalAmount - (cartTotalAmount * 0.20) + 15).toFixed(2)}</span>
             </div>
             <button className="btn btn-dark w-100 rounded-pill py-2" onClick={handleCheckout}>
               Go to Checkout <i className="bi bi-arrow-right ms-2"></i>

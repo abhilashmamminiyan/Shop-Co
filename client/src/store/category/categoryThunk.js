@@ -6,7 +6,7 @@ export const fetchCategories = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await CategoryService.getAllCategories();
-      return res.data;
+      return res.data.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
@@ -18,7 +18,7 @@ export const fetchCategoryById = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const res = await CategoryService.getCategoryById(id);
-      return res.data;
+      return res.data.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }

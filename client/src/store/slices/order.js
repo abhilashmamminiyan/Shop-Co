@@ -58,7 +58,23 @@ const orderSlice = createSlice({
             })
             .addCase(fetchOrders.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.orders = action.payload;
+                const rawOrders = action.payload.data || action.payload || [];
+                state.orders = rawOrders.map(order => ({
+                    ...order,
+                    totalAmount: order.total,
+                    subtotal: order.subtotal,
+                    discount: order.discount,
+                    deliveryFee: order.deliveryFee,
+                    Products: (order.items || []).map(item => ({
+                        ...item.product,
+                        OrderItem: {
+                            quantity: item.quantity,
+                            price: item.price,
+                            size: item.size,
+                            color: item.color
+                        }
+                    }))
+                }));
             })
             .addCase(fetchOrders.rejected, (state, action) => {
                 state.status = 'failed';
@@ -70,8 +86,6 @@ const orderSlice = createSlice({
             })
             .addCase(placeOrder.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Optionally append new order if returned
-                // state.orders.unshift(action.payload);
             })
             .addCase(placeOrder.rejected, (state, action) => {
                 state.status = 'failed';
@@ -80,18 +94,48 @@ const orderSlice = createSlice({
             // Admin: Fetch All Orders
             .addCase(fetchAllOrders.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.adminOrders = action.payload;
+                const rawOrders = action.payload.data || action.payload || [];
+                state.adminOrders = rawOrders.map(order => ({
+                    ...order,
+                    totalAmount: order.total,
+                    subtotal: order.subtotal,
+                    discount: order.discount,
+                    deliveryFee: order.deliveryFee,
+                    Products: (order.items || []).map(item => ({
+                        ...item.product,
+                        OrderItem: {
+                            quantity: item.quantity,
+                            price: item.price,
+                            size: item.size,
+                            color: item.color
+                        }
+                    }))
+                }));
             })
             // Admin: Update Status
             .addCase(updateOrderStatus.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                if(state.adminOrders) {
-                     const index = state.adminOrders.findIndex(o => o.id === action.payload.id);
+                const updatedOrderRaw = action.payload.data || action.payload;
+                if(state.adminOrders && updatedOrderRaw) {
+                     const updatedOrder = {
+                        ...updatedOrderRaw,
+                        totalAmount: updatedOrderRaw.total,
+                        subtotal: updatedOrderRaw.subtotal,
+                        discount: updatedOrderRaw.discount,
+                        deliveryFee: updatedOrderRaw.deliveryFee,
+                        Products: (updatedOrderRaw.items || []).map(item => ({
+                            ...item.product,
+                            OrderItem: {
+                                quantity: item.quantity,
+                                price: item.price,
+                                size: item.size,
+                                color: item.color
+                            }
+                        }))
+                     };
+                     const index = state.adminOrders.findIndex(o => o.id === updatedOrder.id);
                      if(index !== -1) {
-                         state.adminOrders[index] = action.payload; 
-                     } else {
-                         // Fallback re-fetch or manual update if payload structure differs
-                         // For now, assuming payload is the updated order object
+                         state.adminOrders[index] = updatedOrder; 
                      }
                 }
             });

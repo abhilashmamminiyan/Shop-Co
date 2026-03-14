@@ -108,16 +108,20 @@ export default function Checkout() {
                         <h4 className="mb-3 fw-bold">Order Summary</h4>
                         <div className="d-flex justify-content-between mb-2">
                             <span>Subtotal</span>
-                            <span className="fw-bold">${cartTotalAmount}</span>
+                            <span className="fw-bold">${cartTotalAmount.toFixed(2)}</span>
+                        </div>
+                        <div className="d-flex justify-content-between mb-2">
+                            <span>Discount (-20%)</span>
+                            <span className="text-danger">-${(cartTotalAmount * 0.20).toFixed(2)}</span>
                         </div>
                         <div className="d-flex justify-content-between mb-2">
                             <span>Delivery Fee</span>
-                            <span>$15</span>
+                            <span>$15.00</span>
                         </div>
                         <hr />
                         <div className="d-flex justify-content-between mb-4">
                             <span className="fw-bold fs-5">Total</span>
-                            <span className="fw-bold fs-5">${cartTotalAmount + 15}</span>
+                            <span className="fw-bold fs-5">${(cartTotalAmount - (cartTotalAmount * 0.20) + 15).toFixed(2)}</span>
                         </div>
                         <button 
                             className="btn btn-dark w-100 rounded-pill py-2" 

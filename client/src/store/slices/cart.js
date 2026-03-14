@@ -113,11 +113,20 @@ const cartSlice = createSlice({
             })
             .addCase(fetchCart.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Assuming payload structure { id, Products: [...] }
-                if (action.payload && action.payload.Products) {
-                    state.items = action.payload.Products;
+                // Backend returns: { success: true, data: { id, userId, items: [ { id, quantity, product: { ... } } ] } }
+                if (action.payload && action.payload.data && action.payload.data.items) {
+                    // Map the backend structure to what the frontend components expect:
+                    // Frontend expects `item` to have Product fields directly and `CartItem` for association data
+                    state.items = action.payload.data.items.map(cartItem => ({
+                        ...cartItem.product,
+                        CartItem: {
+                            quantity: cartItem.quantity,
+                            size: cartItem.size || '', // assuming size/color might be added later to backend
+                            color: cartItem.color || ''
+                        }
+                    }));
                     state.cartTotalQuantity = state.items.reduce((acc, item) => acc + item.CartItem.quantity, 0);
-                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (item.price * item.CartItem.quantity), 0);
+                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (parseFloat(item.price) * item.CartItem.quantity), 0);
                     localStorage.setItem('cartItems', JSON.stringify(state.items));
                 } else {
                     state.items = [];
@@ -132,11 +141,18 @@ const cartSlice = createSlice({
             })
             .addCase(addToCart.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Handle the cart data returned from fetchCart
-                if (action.payload && action.payload.Products) {
-                    state.items = action.payload.Products;
+                // fetchCart is dispatched inside addToCart, so payload here is the fetchCart result
+                if (action.payload && action.payload.data && action.payload.data.items) {
+                    state.items = action.payload.data.items.map(cartItem => ({
+                        ...cartItem.product,
+                        CartItem: {
+                            quantity: cartItem.quantity,
+                            size: cartItem.size || '',
+                            color: cartItem.color || ''
+                        }
+                    }));
                     state.cartTotalQuantity = state.items.reduce((acc, item) => acc + item.CartItem.quantity, 0);
-                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (item.price * item.CartItem.quantity), 0);
+                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (parseFloat(item.price) * item.CartItem.quantity), 0);
                     localStorage.setItem('cartItems', JSON.stringify(state.items));
                 }
             })
@@ -149,11 +165,17 @@ const cartSlice = createSlice({
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Handle the cart data returned from fetchCart
-                if (action.payload && action.payload.Products) {
-                    state.items = action.payload.Products;
+                if (action.payload && action.payload.data && action.payload.data.items) {
+                    state.items = action.payload.data.items.map(cartItem => ({
+                        ...cartItem.product,
+                        CartItem: {
+                            quantity: cartItem.quantity,
+                            size: cartItem.size || '',
+                            color: cartItem.color || ''
+                        }
+                    }));
                     state.cartTotalQuantity = state.items.reduce((acc, item) => acc + item.CartItem.quantity, 0);
-                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (item.price * item.CartItem.quantity), 0);
+                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (parseFloat(item.price) * item.CartItem.quantity), 0);
                     localStorage.setItem('cartItems', JSON.stringify(state.items));
                 }
             })
@@ -166,11 +188,17 @@ const cartSlice = createSlice({
             })
             .addCase(updateItemQuantityAsync.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                // Handle the cart data returned from fetchCart
-                if (action.payload && action.payload.Products) {
-                    state.items = action.payload.Products;
+                if (action.payload && action.payload.data && action.payload.data.items) {
+                    state.items = action.payload.data.items.map(cartItem => ({
+                        ...cartItem.product,
+                        CartItem: {
+                            quantity: cartItem.quantity,
+                            size: cartItem.size || '',
+                            color: cartItem.color || ''
+                        }
+                    }));
                     state.cartTotalQuantity = state.items.reduce((acc, item) => acc + item.CartItem.quantity, 0);
-                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (item.price * item.CartItem.quantity), 0);
+                    state.cartTotalAmount = state.items.reduce((acc, item) => acc + (parseFloat(item.price) * item.CartItem.quantity), 0);
                     localStorage.setItem('cartItems', JSON.stringify(state.items));
                 }
             })

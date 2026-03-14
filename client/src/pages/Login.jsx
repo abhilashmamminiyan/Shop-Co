@@ -35,11 +35,19 @@ export default function Login() {
           navigate("/");
         })
         .catch((error) => {
+          let errorMsg = 'Invalid credentials. Please try again.';
+          if (typeof error === 'string') {
+            errorMsg = error;
+          } else if (error && error.message) {
+            errorMsg = error.message;
+          } else if (error && typeof error === 'object') {
+            errorMsg = JSON.stringify(error);
+          }
           setAlertState({
             show: true,
             type: 'error',
             title: 'Login Failed',
-            message: error || 'Invalid credentials. Please try again.'
+            message: errorMsg
           });
         });
     } else {
@@ -56,7 +64,15 @@ export default function Login() {
           });
         })
         .catch((error) => {
-          const errorMessage = error || "Registration failed";
+          let errorMessage = "Registration failed";
+          if (typeof error === 'string') {
+            errorMessage = error;
+          } else if (error && error.message) {
+            errorMessage = error.message;
+          } else if (error && typeof error === 'object') {
+            errorMessage = JSON.stringify(error);
+          }
+
           if (errorMessage.toLowerCase().includes("already exist") ||
             errorMessage.toLowerCase().includes("duplicate")) {
             setAlertState({

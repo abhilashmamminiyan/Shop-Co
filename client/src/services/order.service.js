@@ -1,31 +1,31 @@
-import axios from 'axios';
+import api from './api';
 
-const API_URL = 'http://localhost:4000/api/orders/';
+const API_URL = '/orders/';
 
 const getUserOrders = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    return axios.get(API_URL, {
+    return api.get(API_URL, {
         headers: { Authorization: `Bearer ${user?.token}` },
     });
 };
 
 const placeOrder = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    return axios.post(API_URL, {}, {
+    return api.post(API_URL, {}, {
         headers: { Authorization: `Bearer ${user?.token}` },
     });
 }
 
 const getAllOrders = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    return axios.get(API_URL, {
+    return api.get(API_URL, {
         headers: { Authorization: `Bearer ${user?.token}` },
     });
 };
 
 const updateOrderStatus = (id, status) => {
     const user = JSON.parse(localStorage.getItem('user'));
-    return axios.put(API_URL + id + '/status', { status }, {
+    return api.put(API_URL + id + '/status', { status }, {
         headers: { Authorization: `Bearer ${user?.token}` },
     });
 };

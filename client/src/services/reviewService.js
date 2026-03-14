@@ -1,14 +1,14 @@
-import axios from 'axios';
+import api from './api';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:4000/api/products/';
+const API_URL = '/products/';
 
 const getReviews = (productId) => {
-    return axios.get(API_URL + productId + '/reviews');
+    return api.get(`${API_URL}/${productId}/reviews`);
 };
 
 const addReview = (productId, reviewData) => {
-    return axios.post(API_URL + productId + '/reviews', reviewData, { headers: authHeader() });
+    return api.post(`${API_URL}/${productId}/reviews`, reviewData, { headers: authHeader() });
 };
 
 const reviewService = {
