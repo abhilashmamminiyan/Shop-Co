@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from '../store/category/categoryThunk';
 import { fetchProducts } from '../store/slices/productSlice';
+import { getImageUrl } from '../utils/imageUrl';
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -180,7 +181,7 @@ export default function HomePage() {
             <div key={category.id} className={i % 4 === 1 || i % 4 === 2 ? 'col-12 col-md-8' : 'col-12 col-md-4'}>
               <Link to={`/category/${category.id}`} style={{ textDecoration: 'none' }}>
                 <img
-                  src={category.image}
+                  src={getImageUrl(category.image)}
                   alt={category.name}
                   className={`img-fluid rounded-4 ${styles.categoryImage}`}
                 />

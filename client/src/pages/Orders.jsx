@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { getImageUrl } from '../utils/imageUrl';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrders } from '../store/slices/order';
 import { Link } from 'react-router-dom';
@@ -59,7 +60,7 @@ export default function OrdersPage() {
                                 {order.Products.map((product) => (
                                     <div key={product.id} className="d-flex align-items-center mb-3">
                                         <img
-                                            src={product.image}
+                                            src={getImageUrl(product.image)}
                                             alt={product.name}
                                             className="rounded"
                                             style={{ width: '60px', height: '60px', objectFit: 'cover' }}

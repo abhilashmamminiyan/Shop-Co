@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import StarRating from '../common/StarRating';
+import { getImageUrl } from '../../utils/imageUrl';
 
 export default function ProductCard({ product }) {
 
@@ -10,7 +11,7 @@ export default function ProductCard({ product }) {
           className="text-decoration-none text-dark"
         >
       <img
-        src={product.image}
+        src={getImageUrl(product.image)}
         style={{ width:'100%', height: 'auto'}}
         className="card-img-top"
         alt={product.name}

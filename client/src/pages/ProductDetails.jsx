@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import '../styles/ProductDetails.css'
+import { getImageUrl } from '../utils/imageUrl';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 import StarRating from "../components/common/StarRating";
@@ -126,7 +127,7 @@ export default function ProductDetailPage() {
               {images.map((image, index) => (
                 <img
                   key={index}
-                  src={image}
+                  src={getImageUrl(image)}
                   alt={`thumbnail-${index}`}
                   className={`img-fluid rounded thumbnail
                     ${activeImage === image ? "active-thumb" : ""}`
@@ -141,7 +142,7 @@ export default function ProductDetailPage() {
             {/* Main Image */}
             <div className="flex-grow-1 mb-3 mb-md-0 order-1 order-md-2">
               <img
-                src={activeImage || product.image}
+                src={getImageUrl(activeImage || product.image)}
                 alt={product.name}
                 className="img-fluid rounded w-100"
                 style={{ maxHeight: '500px', objectFit: 'contain' }}
@@ -151,7 +152,7 @@ export default function ProductDetailPage() {
         ) : (
           <div className="col-md-6 mb-3 mb-md-0 order-1 col-md-6">
             <img
-              src={product.image}
+              src={getImageUrl(product.image)}
               alt={product.name}
               className="img-fluid rounded w-100"
             />
