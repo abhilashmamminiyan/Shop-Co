@@ -20,7 +20,6 @@ services:
   - type: web
     name: client
     env: static
-    region: oregon
     plan: starter
     buildCommand: npm run build
     staticPublishPath: build
