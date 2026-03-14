@@ -25,7 +25,7 @@ services:
     rootDir: client
     envVars:
       - key: REACT_APP_API_URL
-        value: ${server.url}
+        value: ${server.url}/api
 
 databases:
   - name: shopco-db
