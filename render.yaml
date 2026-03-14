@@ -2,8 +2,7 @@ services:
   - type: web
     name: server
     env: node
-    region: oregon
-    plan: starter
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     envVars:
@@ -20,7 +19,7 @@ services:
   - type: web
     name: client
     env: static
-    plan: starter
+    plan: free
     buildCommand: npm run build
     staticPublishPath: build
     envVars:
@@ -31,5 +30,4 @@ databases:
   - name: shopco-db
     databaseName: shopco
     user: shopco
-    region: oregon
-    plan: starter
+    plan: free
